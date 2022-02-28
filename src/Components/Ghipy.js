@@ -7,7 +7,7 @@ import Container from "@mui/material/Container";
 import GipyCard from "./Card";
 import { CircularProgress } from "@mui/material";
 import Header from "./Header";
-import { MyFavorites } from "./pages/MyFavorites";
+import MyFavorites from "./pages/MyFavorites";
 
 const Ghipy = () => {
   const [data, setdata] = useState([]);
@@ -33,7 +33,7 @@ const Ghipy = () => {
             limit: 6,
           },
         });
-        // console.log(results);
+        console.log("favourites:", favourites);
         setdata(results.data.data);
       } catch (err) {
         setiserror(true);
@@ -43,6 +43,14 @@ const Ghipy = () => {
     };
     fetchData();
   }, []);
+
+  // const handleScroll = (e) => {
+  //   console.log("hi");
+  // };
+  // useEffect(({ fetchData }) => {
+  //   fetchData();
+  //   window.addEventListener("scroll", handleScroll);
+  // }, []);
 
   const handleSearch = (e) => {
     setsearch(e.target.value);
@@ -99,6 +107,8 @@ const Ghipy = () => {
         itemsPerPage={itemsPerPage}
         totalItems={data.length}
       /> */}
+      <MyFavorites favourites={favourites} handleFavorite={addFavorite} />
+      {/* {favourites.length>0  ? <MyFavorites favourites={favourites}/> : ""   }   */}
     </Container>
   );
 };

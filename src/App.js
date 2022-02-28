@@ -14,9 +14,9 @@ export default function App() {
         <Route exact path="/">
           <Ghipy />
         </Route>
-        <Route path="/MyFavorites">
+        {/* <Route path="/MyFavorites">
           <MyFavorites />
-        </Route>
+        </Route> */}
         <Route path="/Loadmore">
           <Loadmore />
         </Route>

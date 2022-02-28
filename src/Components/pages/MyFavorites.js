@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import GipyCard from "../Card";
 import Grid from "@mui/material/Grid";
+// import favourites from '../Ghipy'
+const MyFavorites = ({ favourites }) => {
+  // console.log(favourites);
 
-export const MyFavorites = () =>
-  // el, favourites, setfavourites
-  {
-    return (
-      <div>
-        <GipyCard />
-      </div>
-      // <Grid container spacing={2} style={{ paddingTop: "20px" }}>
-      //   {/* {data.map((el) => ( */}
-      //   {/* <Grid item key={el.id} xs={12} md={6} lg={4}> */}
-      //   <GipyCard
-      //   // el={favourites} handleFavorite={addFavorite}
-      //   />
-      //   {/* </Grid> */}
-      //   {/* ))} */}
-      // </Grid>
-    );
-  };
+  return (
+    <Grid container spacing={2} style={{ paddingTop: "20px" }}>
+      {/* {console.log("asad:",favourites)}
+       */}
+      <h2>Favorite</h2>
+      {favourites.map((el) => (
+        <Grid item key={el.id} xs={12} md={6} lg={4}>
+          <GipyCard el={el} />
+        </Grid>
+      ))}
+    </Grid>
+  );
+};
+
+export default MyFavorites;
