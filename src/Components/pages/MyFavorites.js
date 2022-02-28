@@ -9,7 +9,7 @@ const MyFavorites = ({ favourites }) => {
     <Grid container spacing={2} style={{ paddingTop: "20px" }}>
       {/* {console.log("asad:",favourites)}
        */}
-      <h2>Favorite</h2>
+      <h1>Favorite</h1>
       {favourites.map((el) => (
         <Grid item key={el.id} xs={12} md={6} lg={4}>
           <GipyCard el={el} />

@@ -16,11 +16,11 @@ const Ghipy = () => {
   const [iserror, setiserror] = useState(false);
   const [favourites, setfavourites] = useState([]);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(25);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [itemsPerPage, setItemsPerPage] = useState(25);
+  // const indexOfLastItem = currentPage * itemsPerPage;
+  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +30,7 @@ const Ghipy = () => {
         const results = await axios("https://api.giphy.com/v1/gifs/trending", {
           params: {
             api_key: "WbVhYZ2ykeHizFW6NvZZ8mUztvPxhJ8s",
-            limit: 6,
+            limit: 10,
           },
         });
         console.log("favourites:", favourites);
@@ -47,7 +47,7 @@ const Ghipy = () => {
   // const handleScroll = (e) => {
   //   console.log("hi");
   // };
-  // useEffect(({ fetchData }) => {
+  // useEffect((fetchData) => {
   //   fetchData();
   //   window.addEventListener("scroll", handleScroll);
   // }, []);
@@ -63,7 +63,7 @@ const Ghipy = () => {
       params: {
         api_key: "WbVhYZ2ykeHizFW6NvZZ8mUztvPxhJ8s",
         q: search,
-        limit: 50,
+        limit: 10,
       },
     });
     console.log(results);
