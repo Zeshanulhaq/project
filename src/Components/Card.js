@@ -39,7 +39,7 @@ export default function GipyCard({ el, handleFavorite }) {
     >
       <CardMedia
         component="img"
-        image={el.images.preview_gif.url}
+        image={el.images.fixed_height.url}
         alt="green iguana"
       />
       <CardContent>
@@ -51,11 +51,11 @@ export default function GipyCard({ el, handleFavorite }) {
             onClick={() => handleFavorite(el)}
             aria-label="add to favorites"
           >
-            <FavoriteIcon />
+            {<FavoriteIcon />}
           </IconButton>
-          <IconButton aria-label="share">
+          {/* <IconButton aria-label="share">
             <ShareIcon />
-          </IconButton>
+          </IconButton> */}
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
@@ -65,6 +65,11 @@ export default function GipyCard({ el, handleFavorite }) {
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>{el.title}</Typography>
+          </CardContent>
+        </Collapse>
       </CardContent>
     </Card>
   );

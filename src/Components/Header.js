@@ -86,13 +86,13 @@ export default function Header(props) {
           >
             MUI
           </Typography>
-          <Select value={age} label="Age" onChange={handleChange}>
+          {/* <Select value={age} label="Age" onChange={handleChange}>
             <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>
               <NavLink to="/Loadmore">Loadmore</NavLink>
             </MenuItem>
-          </Select>
+          </Select> */}
           <Search>
             <SearchIconWrapper></SearchIconWrapper>
             <StyledInputBase
