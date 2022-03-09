@@ -33,7 +33,7 @@ const Ghipy = () => {
             limit: 10,
           },
         });
-        console.log("favourites:", favourites);
+        console.log(results);
         setdata(results.data.data);
       } catch (err) {
         setiserror(true);
@@ -43,14 +43,6 @@ const Ghipy = () => {
     };
     fetchData();
   }, []);
-
-  // const handleScroll = (e) => {
-  //   console.log("hi");
-  // };
-  // useEffect((fetchData) => {
-  //   fetchData();
-  //   window.addEventListener("scroll", handleScroll);
-  // }, []);
 
   const handleSearch = (e) => {
     setsearch(e.target.value);
@@ -63,52 +55,67 @@ const Ghipy = () => {
       params: {
         api_key: "WbVhYZ2ykeHizFW6NvZZ8mUztvPxhJ8s",
         q: search,
-        limit: 10,
+        limit: 5,
       },
     });
     console.log(results);
     setdata(results.data.data);
   };
+
+  useEffect(() => {
+    const gifFavourites = JSON.parse(
+      localStorage.getItem("react-gif-app-favourites")
+    );
+    setfavourites(gifFavourites);
+  }, []);
+
+  const saveToLocalStorage = (items) => {
+    localStorage.setItem("react-gif-app-favourites", JSON.stringify(items));
+  };
+
+  // const removeFromStorage = (items) => {
+  //   localStorage.removeItem("react-movie-app-favourites");
+  // };
+
   const addFavorite = (el) => {
     const newFavouriteList = [...favourites, el];
     setfavourites(newFavouriteList);
+    saveToLocalStorage(newFavouriteList);
   };
-  // const pageSelected = (pageNumber) => {
-  //   setCurrentPage(pageNumber);
-  // };
-  if (loading) {
-    return (
-      <Box display="flex" justifyContent="center">
-        <CircularProgress />
-        <Typography>Please wait while Gifs are loading</Typography>
-      </Box>
+  const removeFavourites = (el) => {
+    const newFavouriteList = favourites.filter(
+      (favourite) => favourite.id !== el.id
     );
-  }
+    setfavourites(newFavouriteList);
+    // removeFromStorage(newFavouriteList);
+  };
 
   return (
-    <Container>
+    <Container style={{ backgroundColor: "#000" }}>
       <Header
         handleSearch={handleSearch}
         handleSubmit={handleSubmit}
         search={search}
       />
-
-      <Grid container spacing={2} style={{ paddingTop: "20px" }}>
-        {data.map((el) => (
-          <Grid item key={el.id} xs={12} md={6} lg={4}>
-            <GipyCard el={el} handleFavorite={addFavorite} />
-          </Grid>
-        ))}
-      </Grid>
-
-      {/* <LoadMore
-        pageSelected={pageSelected}
-        currentPage={currentPage}
-        itemsPerPage={itemsPerPage}
-        totalItems={data.length}
-      /> */}
-      <MyFavorites favourites={favourites} handleFavorite={addFavorite} />
-      {/* {favourites.length>0  ? <MyFavorites favourites={favourites}/> : ""   }   */}
+      {loading ? (
+        <Box display="flex" justifyContent="center">
+          <CircularProgress />
+          <Typography>Please wait while Gifs are loading</Typography>
+        </Box>
+      ) : (
+        <Grid container spacing={2} style={{ paddingTop: "20px" }}>
+          {data.map((el) => (
+            <Grid item key={el.id} xs={12} md={6} lg={4}>
+              <GipyCard el={el} handleFavorite={addFavorite} />
+            </Grid>
+          ))}
+        </Grid>
+      )}
+      <MyFavorites
+        favourites={favourites}
+        handleFavorite={addFavorite}
+        remove={removeFavourites}
+      />
     </Container>
   );
 };
